@@ -68,6 +68,7 @@
         this.refreshButtonClasName(card);
         button.innerText = card.text;
         button.style.width = "20%";
+        button.style.fontSize = "30px";
 
         this.content.appendChild(button);
 
