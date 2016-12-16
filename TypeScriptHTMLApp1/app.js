@@ -54,7 +54,7 @@ var CardGame = (function () {
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        //button.style.width = "150px";
+        button.style.width = "20%";
         this.content.appendChild(button);
         button.onclick = function () {
             if (card.isRight != null)
@@ -127,18 +127,18 @@ var CardGame = (function () {
         var className;
         if (card.isRight == null) {
             if (card.isSelected) {
-                className = "btn btn-info btn-lg col-md-3";
+                className = "btn btn-info btn-lg";
             }
             else {
-                className = "btn btn-default btn-lg col-md-3";
+                className = "btn btn-default btn-lg";
             }
         }
         else {
             if (card.isRight) {
-                className = "btn btn-success btn-lg col-md-3";
+                className = "btn btn-success btn-lg";
             }
             else {
-                className = "btn btn-danger btn-lg col-md-3";
+                className = "btn btn-danger btn-lg";
             }
         }
         card.button.className = className;
