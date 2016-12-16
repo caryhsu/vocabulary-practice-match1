@@ -67,8 +67,8 @@
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "20%";
-        button.style.fontSize = "60px";
+        button.style.width = "25%";
+        button.style.fontSize = "48px";
 
         this.content.appendChild(button);
 
@@ -233,7 +233,7 @@ window.onload = () => {
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
     startButton.onclick = () => {
-        game.initCards(10, vocabularies);
+        game.initCards(8, vocabularies);
         game.start();
         startButton.style.display = "none";
     };
