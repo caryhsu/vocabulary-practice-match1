@@ -57,7 +57,7 @@ var CardGame = (function () {
         button.style.width = "25%";
         button.style.fontSize = "36px";
         this.content.appendChild(button);
-        button.onclick = function () {
+        var buttonOnClickAction = function () {
             if (card.isRight != null)
                 return;
             card.isSelected = !card.isSelected;
@@ -94,6 +94,8 @@ var CardGame = (function () {
             }
             _this.refreshButtonClasName(card);
         };
+        button.onclick = buttonOnClickAction;
+        button.ontouchstart = buttonOnClickAction;
     };
     CardGame.prototype.isLastPairSelection = function () {
         var unSelectedCount = 0;
@@ -197,10 +199,12 @@ window.onload = function () {
     var content = document.getElementById('content');
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
-    startButton.onclick = function () {
+    var action = function () {
         startButton.style.display = "none";
         game.initCards(8, vocabularies);
         game.start();
     };
+    startButton.onclick = action;
+    startButton.ontouchstart = action;
 };
 //# sourceMappingURL=app.js.map

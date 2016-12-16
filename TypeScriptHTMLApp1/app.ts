@@ -72,7 +72,7 @@
 
         this.content.appendChild(button);
 
-        button.onclick = () => {
+        var buttonOnClickAction = () => {
             if (card.isRight != null) return;
             card.isSelected = !card.isSelected;
             if (card.isSelected) {
@@ -108,6 +108,8 @@
             }
             this.refreshButtonClasName(card);
         };
+        button.onclick = buttonOnClickAction;
+        button.ontouchstart = buttonOnClickAction;
     }
 
     isLastPairSelection(): boolean {
@@ -232,9 +234,11 @@ window.onload = () => {
     var content = document.getElementById('content');
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
-    startButton.onclick = () => {
+    var action = () => {
         startButton.style.display = "none";
         game.initCards(8, vocabularies);
         game.start();
     };
+    startButton.onclick = action;
+    startButton.ontouchstart = action;
 };
