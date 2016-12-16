@@ -38,11 +38,23 @@ var CardGame = (function () {
     };
     CardGame.prototype.createButton = function (card) {
         var _this = this;
+        /*
+        var divRow: HTMLDivElement = document.createElement('div');
+        divRow.className = "row";
+        var divCell: HTMLDivElement = document.createElement('div');
+        divCell.className = "col-md-1";
+        divRow.appendChild(divCell);
+        var button: HTMLButtonElement = document.createElement('button');
+        button.innerText = card.text;
+        button.style.width = "100%";
+        divCell.appendChild(button);
+        this.content.appendChild(divRow);
+        */
         var button = document.createElement('button');
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "150px";
+        //button.style.width = "150px";
         this.content.appendChild(button);
         button.onclick = function () {
             if (card.isRight != null)
@@ -115,18 +127,18 @@ var CardGame = (function () {
         var className;
         if (card.isRight == null) {
             if (card.isSelected) {
-                className = "btn btn-info btn-lg";
+                className = "btn btn-info btn-lg col-md-3";
             }
             else {
-                className = "btn btn-default btn-lg";
+                className = "btn btn-default btn-lg col-md-3";
             }
         }
         else {
             if (card.isRight) {
-                className = "btn btn-success btn-lg";
+                className = "btn btn-success btn-lg col-md-3";
             }
             else {
-                className = "btn btn-danger btn-lg";
+                className = "btn btn-danger btn-lg col-md-3";
             }
         }
         card.button.className = className;
