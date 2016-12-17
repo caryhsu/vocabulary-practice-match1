@@ -246,7 +246,16 @@ vocabularies.push(new Vocabulary("lazy", "懶惰", null));
 vocabularies.push(new Vocabulary("climb", "爬", null));
 vocabularies.push(new Vocabulary("save", "搭救", null));
 vocabularies.push(new Vocabulary("secret", "秘密", null));
+vocabularies.push(new Vocabulary("wrap", "包裝", null));
+vocabularies.push(new Vocabulary("idea", "點子", null));
+vocabularies.push(new Vocabulary("hobby", "嗜好", null));
+vocabularies.push(new Vocabulary("small", "小的", null));
+vocabularies.push(new Vocabulary("Christmas", "聖誕節", null));
+vocabularies.push(new Vocabulary("size", "尺寸", null));
+vocabularies.push(new Vocabulary("probably", "可能", null));
+vocabularies.push(new Vocabulary("soap", "香皂", null));
 /*
+vocabularies.push(new Vocabulary("", "", null));
 vocabularies.push(new Vocabulary("", "", null));
 vocabularies.push(new Vocabulary("", "", null));
 vocabularies.push(new Vocabulary("", "", null));
