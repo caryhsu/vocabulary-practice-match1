@@ -61,12 +61,6 @@ var CardGame = (function () {
             if (card.isRight != null)
                 return;
             card.isSelected = !card.isSelected;
-            if (_this.selectedCards.length == 1) {
-                var c0 = _this.selectedCards[0];
-                if (c0.isEnglish == card.isEnglish) {
-                    c0.isSelected = false;
-                }
-            }
             if (card.isSelected && _this.checkToAddSelectedCards(card)) {
                 _this.selectedCards.push(card);
             }
@@ -210,6 +204,27 @@ vocabularies.push(new Vocabulary("lake", "湖", null));
 vocabularies.push(new Vocabulary("problem", "問題", null));
 vocabularies.push(new Vocabulary("wait", "等待", null));
 vocabularies.push(new Vocabulary("elevator", "電梯", null));
+vocabularies.push(new Vocabulary("button", "按鈕", null));
+vocabularies.push(new Vocabulary("search", "搜尋", null));
+vocabularies.push(new Vocabulary("trap", "困住", null));
+vocabularies.push(new Vocabulary("stair", "階梯", null));
+vocabularies.push(new Vocabulary("lazy", "懶惰", null));
+vocabularies.push(new Vocabulary("climb", "爬", null));
+vocabularies.push(new Vocabulary("save", "搭救", null));
+vocabularies.push(new Vocabulary("secret", "秘密", null));
+/*
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+*/
 window.onload = function () {
     var content = document.getElementById('content');
     var game = new CardGame(content);
