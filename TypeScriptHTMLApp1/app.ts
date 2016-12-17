@@ -25,10 +25,10 @@
             var index: number = i % vocabularies.length;
             var v: Vocabulary = vocabularies[index];
 
-            var card: Card = new Card(i, v.chinese);
+            var card: Card = new Card(i, false, v.chinese);
             this.cards.push(card);
 
-            var card: Card = new Card(i, v.english);
+            var card: Card = new Card(i, true, v.english);
             this.cards.push(card);
         }
         CardGame.shuffle(this.cards);
@@ -75,7 +75,13 @@
         var buttonOnClickAction = () => {
             if (card.isRight != null) return;
             card.isSelected = !card.isSelected;
-            if (card.isSelected) {
+            if (this.selectedCards.length == 1) {
+                var c0: Card = this.selectedCards[0];
+                if (c0.isEnglish == card.isEnglish) {
+                    c0.isSelected = false;
+                }
+            }
+            if (card.isSelected && this.checkToAddSelectedCards(card)) {
                 this.selectedCards.push(card);
             }
             if (this.selectedCards.length == 2) {
@@ -110,6 +116,13 @@
         };
         button.onclick = buttonOnClickAction;
         button.ontouchstart = buttonOnClickAction;
+    }
+
+    checkToAddSelectedCards(card: Card): boolean {
+        if (this.selectedCards.length == 0) return true;
+        var card0: Card = this.selectedCards[0];
+        if (card0 == card) return false;
+        return true;
     }
 
     isLastPairSelection(): boolean {
@@ -187,13 +200,15 @@
 
 class Card {
     number: number;
+    isEnglish: boolean;
     text: string;
     isSelected: boolean;
     isRight: Boolean;
     button: HTMLButtonElement;
 
-    constructor(number: number, text: string) {
+    constructor(number: number, isEnglish: boolean, text: string) {
         this.number = number;
+        this.isEnglish = isEnglish;
         this.text = text;
         this.isSelected = false;
         this.isRight = null;

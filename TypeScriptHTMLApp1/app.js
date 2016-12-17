@@ -15,9 +15,9 @@ var CardGame = (function () {
         for (var i = 0; i < cardNumber; i++) {
             var index = i % vocabularies.length;
             var v = vocabularies[index];
-            var card = new Card(i, v.chinese);
+            var card = new Card(i, false, v.chinese);
             this.cards.push(card);
-            var card = new Card(i, v.english);
+            var card = new Card(i, true, v.english);
             this.cards.push(card);
         }
         CardGame.shuffle(this.cards);
@@ -61,7 +61,13 @@ var CardGame = (function () {
             if (card.isRight != null)
                 return;
             card.isSelected = !card.isSelected;
-            if (card.isSelected) {
+            if (_this.selectedCards.length == 1) {
+                var c0 = _this.selectedCards[0];
+                if (c0.isEnglish == card.isEnglish) {
+                    c0.isSelected = false;
+                }
+            }
+            if (card.isSelected && _this.checkToAddSelectedCards(card)) {
                 _this.selectedCards.push(card);
             }
             if (_this.selectedCards.length == 2) {
@@ -96,6 +102,14 @@ var CardGame = (function () {
         };
         button.onclick = buttonOnClickAction;
         button.ontouchstart = buttonOnClickAction;
+    };
+    CardGame.prototype.checkToAddSelectedCards = function (card) {
+        if (this.selectedCards.length == 0)
+            return true;
+        var card0 = this.selectedCards[0];
+        if (card0 == card)
+            return false;
+        return true;
     };
     CardGame.prototype.isLastPairSelection = function () {
         var unSelectedCount = 0;
@@ -163,8 +177,9 @@ var CardGame = (function () {
     return CardGame;
 }());
 var Card = (function () {
-    function Card(number, text) {
+    function Card(number, isEnglish, text) {
         this.number = number;
+        this.isEnglish = isEnglish;
         this.text = text;
         this.isSelected = false;
         this.isRight = null;
