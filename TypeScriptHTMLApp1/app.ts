@@ -35,8 +35,20 @@
     }
 
     start(): void {
+        var divRow: HTMLDivElement;
         for (var index = 0; index < this.cards.length; index++) {
-            this.createButton(this.cards[index]);
+            if (index % 3 == 0) {
+                divRow = document.createElement('div');
+                this.content.appendChild(divRow);
+                divRow.className = "row";
+            }
+            this.createButton(divRow, this.cards[index]);
+            if (index % 3 == 2) {
+                let divRow0: HTMLDivElement = document.createElement('div');
+                divRow0.style.height = "3px";
+                this.content.appendChild(divRow0);
+            }
+
         }
         this.startTimer();
     }
@@ -49,28 +61,20 @@
         }, 100);
     }
 
-    createButton(card: Card): void {
-        /*
-        var divRow: HTMLDivElement = document.createElement('div');
-        divRow.className = "row";
+    createButton(divRow: HTMLDivElement, card: Card): void {
         var divCell: HTMLDivElement = document.createElement('div');
-        divCell.className = "col-md-1";
+        divCell.className = "col-md-4";
         divRow.appendChild(divCell);
-        var button: HTMLButtonElement = document.createElement('button');
-        button.innerText = card.text;
-        button.style.width = "100%";
-        divCell.appendChild(button);
-        this.content.appendChild(divRow);
-        */
+
         var button: HTMLButtonElement = document.createElement('button');
 
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "33%";
+        button.style.width = "100%";
         button.style.fontSize = "30px";
 
-        this.content.appendChild(button);
+        divCell.appendChild(button);
 
         var buttonOnClickAction = () => {
             if (card.isRight != null) return;
