@@ -54,7 +54,7 @@ var CardGame = (function () {
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "25%";
+        button.style.width = "33%";
         button.style.fontSize = "30px";
         this.content.appendChild(button);
         var buttonOnClickAction = function () {
@@ -281,7 +281,7 @@ window.onload = function () {
 function startGame(game) {
     var startButton = document.getElementById('startButton');
     startButton.style.display = "none";
-    game.initCards(8, vocabularies);
+    game.initCards(6, vocabularies);
     game.start();
 }
 //# sourceMappingURL=app.js.map
