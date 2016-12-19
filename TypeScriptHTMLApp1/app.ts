@@ -62,19 +62,25 @@
     }
 
     createButton(divRow: HTMLDivElement, card: Card): void {
+        /*
         var divCell: HTMLDivElement = document.createElement('div');
         divCell.className = "col-md-4";
         divRow.appendChild(divCell);
-
+        */
         var button: HTMLButtonElement = document.createElement('button');
 
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "100%";
+        button.style.width = "32%";
         button.style.fontSize = "24px";
 
-        divCell.appendChild(button);
+        divRow.appendChild(button);
+
+        var separator: HTMLSpanElement = document.createElement('span');
+        separator.style.width = "10%";
+        divRow.appendChild(separator);
+
 
         var buttonOnClickAction = () => {
             if (card.isRight != null) return;
