@@ -55,7 +55,7 @@ var CardGame = (function () {
         this.refreshButtonClasName(card);
         button.innerText = card.text;
         button.style.width = "25%";
-        button.style.fontSize = "36px";
+        button.style.fontSize = "30px";
         this.content.appendChild(button);
         var buttonOnClickAction = function () {
             if (card.isRight != null)
