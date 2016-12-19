@@ -246,16 +246,42 @@ vocabularies.push(new Vocabulary("leave", "離開", null));
 vocabularies.push(new Vocabulary("wrong", "不對的", null));
 vocabularies.push(new Vocabulary("simple", "簡單的", null));
 vocabularies.push(new Vocabulary("main", "主要的", null));
+/*
+vocabularies.push(new Vocabulary("ham", "火腿", null));
+vocabularies.push(new Vocabulary("sause", "醬料", null));
+vocabularies.push(new Vocabulary("gartic", "大蒜", null));
+vocabularies.push(new Vocabulary("nut", "堅果", null));
+vocabularies.push(new Vocabulary("salad", "(蔬菜(沙拉", null));
+vocabularies.push(new Vocabulary("shrimp", "蝦子", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+vocabularies.push(new Vocabulary("", "", null));
+*/
 window.onload = function () {
     var content = document.getElementById('content');
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
     var action = function () {
-        startButton.style.display = "none";
-        game.initCards(8, vocabularies);
-        game.start();
+        setTimeout(function () { return startGame(game); }, 10);
     };
     startButton.onclick = action;
     startButton.ontouchstart = action;
 };
+function startGame(game) {
+    var startButton = document.getElementById('startButton');
+    startButton.style.display = "none";
+    game.initCards(8, vocabularies);
+    game.start();
+}
 //# sourceMappingURL=app.js.map
