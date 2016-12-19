@@ -72,7 +72,7 @@
         this.refreshButtonClasName(card);
         button.innerText = card.text;
         button.style.width = "100%";
-        button.style.fontSize = "30px";
+        button.style.fontSize = "24px";
 
         divCell.appendChild(button);
 
