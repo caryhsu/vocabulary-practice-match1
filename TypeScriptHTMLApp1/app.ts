@@ -72,7 +72,7 @@
         card.button = button;
         this.refreshButtonClasName(card);
         button.innerText = card.text;
-        button.style.width = "32%";
+        button.style.width = "25%";
         button.style.fontSize = "24px";
 
         divRow.appendChild(button);
@@ -329,7 +329,7 @@ window.onload = () => {
 function startGame(game: CardGame) : void {
     var startButton = document.getElementById('startButton');
     startButton.style.display = "none";
-    game.initCards(6, vocabularies);
+    game.initCards(8, vocabularies);
     game.start();
 }
 
