@@ -39,13 +39,13 @@ class CardGame {
     start(): void {
         var divRow: HTMLDivElement;
         for (var index = 0; index < this.cards.length; index++) {
-            if (index % 3 == 0) {
+            if (index % 4 == 0) {
                 divRow = document.createElement('div');
                 this.content.appendChild(divRow);
                 divRow.className = "row";
             }
             this.createButton(divRow, this.cards[index]);
-            if (index % 3 == 2) {
+            if (index % 4 == 3) {
                 let divRow0: HTMLDivElement = document.createElement('div');
                 divRow0.style.height = "3px";
                 this.content.appendChild(divRow0);
