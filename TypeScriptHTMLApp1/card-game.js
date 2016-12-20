@@ -26,17 +26,12 @@ var CardGame = (function () {
     CardGame.prototype.start = function () {
         var divRow;
         for (var index = 0; index < this.cards.length; index++) {
-            if (index % 3 == 0) {
+            if (index % 4 == 0) {
                 divRow = document.createElement('div');
                 this.content.appendChild(divRow);
                 divRow.className = "row";
             }
             this.createButton(divRow, this.cards[index]);
-            if (index % 3 == 2) {
-                var divRow0 = document.createElement('div');
-                divRow0.style.height = "3px";
-                this.content.appendChild(divRow0);
-            }
         }
         this.startTimer();
     };
@@ -51,7 +46,7 @@ var CardGame = (function () {
     CardGame.prototype.createButton = function (divRow, card) {
         var _this = this;
         var divCell = document.createElement('div');
-        divCell.className = "col-xs-4 col-md-4 col-sm-4";
+        divCell.className = "col-xs-3 col-md-3 col-sm-3";
         divRow.appendChild(divCell);
         var button = document.createElement('button');
         card.button = button;

@@ -2,7 +2,6 @@
 /// <reference path="card-game.ts"/>
 
 window.onload = () => {
-    Vocabulary.init();
     var content = document.getElementById('content');
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
