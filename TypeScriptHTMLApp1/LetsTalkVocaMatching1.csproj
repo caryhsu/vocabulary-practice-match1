@@ -28,6 +28,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="card-game.ts" />
+    <TypeScriptCompile Include="question.ts" />
+    <TypeScriptCompile Include="vocabulary.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">

@@ -1,0 +1,6 @@
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\bin\LetsTalkVocaMatching1.dll.config
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\bin\LetsTalkVocaMatching1.dll
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\bin\LetsTalkVocaMatching1.pdb
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\obj\Debug\LetsTalkVocaMatching1.csprojResolveAssemblyReference.cache
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\obj\Debug\LetsTalkVocaMatching1.dll
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp1\obj\Debug\LetsTalkVocaMatching1.pdb
