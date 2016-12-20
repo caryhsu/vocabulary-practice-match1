@@ -65,7 +65,7 @@ class CardGame {
 
     createButton(divRow: HTMLDivElement, card: Card): void {
         var divCell: HTMLDivElement = document.createElement('div');
-        divCell.className = "col-xs-4 col-md-4 col-sm-4";
+        divCell.className = "col-xs-3 col-md-3 col-sm-3";
         divRow.appendChild(divCell);
         var button: HTMLButtonElement = document.createElement('button');
 
