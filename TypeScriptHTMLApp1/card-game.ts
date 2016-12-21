@@ -45,13 +45,6 @@ class CardGame {
                 divRow.className = "row";
             }
             this.createButton(divRow, this.cards[index]);
-            
-            //            if (index % 4 == 3) {
-            //                let divRow0: HTMLDivElement = document.createElement('div');
-            //                divRow0.style.height = "3px";
-            //                this.content.appendChild(divRow0);
-            //            }
-
         }
         this.startTimer();
     }
