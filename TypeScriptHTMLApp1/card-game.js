@@ -9,7 +9,7 @@ var CardGame = (function () {
     CardGame.prototype.initCards = function (cardNumber, p_vocabularies) {
         this.cards = [];
         var vocabularies = p_vocabularies.slice(0);
-        CardGame.shuffle(vocabularies);
+        Arrays.shuffle(vocabularies);
         var number;
         if (cardNumber > p_vocabularies.length)
             cardNumber = p_vocabularies.length;
@@ -21,7 +21,7 @@ var CardGame = (function () {
             var card = new Card(i, true, v.english);
             this.cards.push(card);
         }
-        CardGame.shuffle(this.cards);
+        Arrays.shuffle(this.cards);
     };
     CardGame.prototype.start = function () {
         var divRow;
@@ -154,20 +154,6 @@ var CardGame = (function () {
             }
         }
         card.button.className = className;
-    };
-    CardGame.shuffle = function (array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-        return array;
     };
     return CardGame;
 }());

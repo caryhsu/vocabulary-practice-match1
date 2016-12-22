@@ -18,7 +18,7 @@ class CardGame {
     initCards(cardNumber: number, p_vocabularies: Vocabulary[]): void {
         this.cards = [];
         var vocabularies = p_vocabularies.slice(0);
-        CardGame.shuffle(vocabularies);
+        Arrays.shuffle(vocabularies);
         let number: number;
         if (cardNumber > p_vocabularies.length)
             cardNumber = p_vocabularies.length;
@@ -33,7 +33,7 @@ class CardGame {
             var card: Card = new Card(i, true, v.english);
             this.cards.push(card);
         }
-        CardGame.shuffle(this.cards);
+        Arrays.shuffle(this.cards);
     }
 
     start(): void {
@@ -171,29 +171,12 @@ class CardGame {
             }
             else {
                 className = "btn btn-danger btn-lg";
+                //card.button.effect("shake", {}, 500, alert('aa'));
             }
         }
         card.button.className = className;
     }
 
-    static shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
 }
 
 class Card {
@@ -212,6 +195,3 @@ class Card {
         this.isRight = null;
     }
 }
-
-
-

@@ -1,0 +1,6 @@
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\obj\Debug\Examination.csprojResolveAssemblyReference.cache
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\bin\Examination.dll.config
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\bin\Examination.dll
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\bin\Examination.pdb
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\obj\Debug\Examination.dll
+C:\Users\hsu_c_000\Source\Repos\vocabulary-practice-match1\TypeScriptHTMLApp2\obj\Debug\Examination.pdb

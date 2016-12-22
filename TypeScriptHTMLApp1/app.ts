@@ -6,16 +6,15 @@ window.onload = () => {
     var game = new CardGame(content);
     var startButton = document.getElementById('startButton');
     var action = () => {
-        setTimeout(() => startGame(game), 10);
+        setTimeout(() => {
+            var startButton = document.getElementById('startButton');
+            startButton.style.display = "none";
+            game.initCards(8, vocabularies);
+            game.start();
+        }, 10);
     };
     startButton.onclick = action;
     startButton.ontouchstart = action;
 };
 
-function startGame(game: CardGame): void {
-    var startButton = document.getElementById('startButton');
-    startButton.style.display = "none";
-    game.initCards(8, vocabularies);
-    game.start();
-}
 
