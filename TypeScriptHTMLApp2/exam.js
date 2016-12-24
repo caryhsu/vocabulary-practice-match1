@@ -3,6 +3,7 @@ var Exam = (function () {
     function Exam(content) {
         this.content = content;
         this.questions = [];
+        this.answers = [];
     }
     Exam.prototype.start = function () {
         this.currentIndex = 0;
@@ -23,14 +24,15 @@ var Exam = (function () {
             this.content.appendChild(b);
         }
     };
-    Exam.prototype.initQuestions = function (number, p_questions) {
+    Exam.prototype.initAnswers = function (number, p_questions) {
         var questions = p_questions.slice(0);
         Arrays.shuffle(questions);
         if (number > questions.length)
             number = questions.length;
         for (var index = 0; index < number; index++) {
             var q = questions[index];
-            this.questions.push(new Question(q));
+            this.questions.push(q);
+            this.answers.push(new Answer(q));
         }
     };
     Exam.prototype.shuffleQuestions = function () {
@@ -38,36 +40,48 @@ var Exam = (function () {
     };
     return Exam;
 }());
-var Question = (function () {
-    function Question(q) {
-        this.type = q.type;
-        this.text = q.text;
-        this.options = q.options;
-        this.shuffleOptions();
+var Answer = (function () {
+    function Answer(question) {
+        this.question = question;
+        this.selectedOption = null;
+        this.selectedOptions = [];
+        this.fillingText = "";
     }
-    Question.prototype.shuffleOptions = function () {
-        Arrays.shuffle(this.options);
-    };
-    Question.prototype.right = function () {
-        if (this.type == QuestionType.SINGLE_CHOICE) {
-            var ans = parseInt(this.answer);
-            if (ans == NaN)
-                return false;
-            if (ans >= 0 && ans <= this.options.length) {
-                return this.options[ans].right;
-            }
-            else {
-                return false;
-            }
-        }
-        else if (this.type == QuestionType.MULTIPLE_CHOICE) {
-            var anses = this.answer.split(",");
-            for (var _i = 0, anses_1 = anses; _i < anses_1.length; _i++) {
-                var ans = anses_1[_i];
-            }
-            return true;
+    Answer.prototype.toString = function () {
+        switch (this.question.type) {
+            case QuestionType.SINGLE_CHOICE:
+                if (this.selectedOption == null)
+                    return "";
+                return this.selectedOption.text;
+            case QuestionType.MULTIPLE_CHOICE:
+                return this.selectedOptions.toString();
+            case QuestionType.FILLING:
+                return this.fillingText;
         }
     };
-    return Question;
+    Answer.prototype.isRight = function () {
+        switch (this.question.type) {
+            case QuestionType.SINGLE_CHOICE:
+                if (this.selectedOption == null)
+                    return false;
+                return this.selectedOption.right;
+            case QuestionType.MULTIPLE_CHOICE:
+                for (var _i = 0, _a = this.question.options; _i < _a.length; _i++) {
+                    var option = _a[_i];
+                    if (this.selectedOptions.indexOf(option) >= 0) {
+                        if (option.right == false)
+                            return false;
+                    }
+                    else {
+                        if (option.right == true)
+                            return false;
+                    }
+                }
+                return true;
+            case QuestionType.FILLING:
+                return this.fillingText == this.question.fillingAnswer;
+        }
+    };
+    return Answer;
 }());
 //# sourceMappingURL=exam.js.map

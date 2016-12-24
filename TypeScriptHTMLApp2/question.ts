@@ -1,22 +1,30 @@
 enum QuestionType {
     SINGLE_CHOICE, 
-    MULTIPLE_CHOICE
+    MULTIPLE_CHOICE, 
+    FILLING
 }
 
-class QuestionDefinition {
+class Question {
     type: QuestionType;
     text: string;
     url: string;
-    options: QuestionOptionDefinition[];
-    constructor(type: QuestionType, text: string, url?: string, options?: QuestionOptionDefinition[]) {
+    options: QuestionOption[];
+    fillingAnswer: string; // for FILLING
+    constructor(type: QuestionType, text: string, url?: string, options?: QuestionOption[]) {
         this.type = type;
         this.text = text;
         this.url = url;
         this.options = options;
+        this.fillingAnswer = "";
     }
+
+    shuffleOptions() {
+        Arrays.shuffle(this.options);
+    }
+
 }
 
-class QuestionOptionDefinition {
+class QuestionOption {
     text: string;
     right: boolean;
     constructor(text: string, right: boolean) {

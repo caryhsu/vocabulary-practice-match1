@@ -1,4 +1,3 @@
-var vocabularies = [];
 var Vocabulary = (function () {
     function Vocabulary(english, chinese, url) {
         this.english = english;

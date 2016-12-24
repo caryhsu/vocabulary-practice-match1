@@ -1,9 +1,8 @@
 /// <reference path="vocabulary.ts"/>
 var CardGame = (function () {
     function CardGame(content) {
-        this.content = content;
+        this.ui = new DefaultCardGameUI(this, content);
         this.isHideAll = true;
-        this.timePlayed = 0;
         this.selectedCards = [];
     }
     CardGame.prototype.initCards = function (cardNumber, p_vocabularies) {
@@ -24,79 +23,7 @@ var CardGame = (function () {
         Arrays.shuffle(this.cards);
     };
     CardGame.prototype.start = function () {
-        var divRow;
-        for (var index = 0; index < this.cards.length; index++) {
-            if (index % 4 == 0) {
-                divRow = document.createElement('div');
-                this.content.appendChild(divRow);
-                divRow.className = "row";
-            }
-            this.createButton(divRow, this.cards[index]);
-        }
-        this.startTimer();
-    };
-    CardGame.prototype.startTimer = function () {
-        var _this = this;
-        this.timePlayedTimerToken = setInterval(function () {
-            _this.timePlayed += 0.1;
-            var timeerSpendLabel = document.getElementById('timeerSpendLabel');
-            timeerSpendLabel.innerText = _this.timePlayed.toFixed(1).toString();
-        }, 100);
-    };
-    CardGame.prototype.createButton = function (divRow, card) {
-        var _this = this;
-        var divCell = document.createElement('div');
-        divCell.className = "col-xs-3 col-md-3 col-sm-3";
-        divRow.appendChild(divCell);
-        var button = document.createElement('button');
-        card.button = button;
-        this.refreshButtonClasName(card);
-        button.innerText = card.text;
-        button.style.width = "100%";
-        button.style.fontSize = "24px";
-        divCell.appendChild(button);
-        var separator = document.createElement('span');
-        separator.style.width = "10%";
-        divRow.appendChild(separator);
-        var buttonOnClickAction = function () {
-            if (card.isRight != null)
-                return;
-            card.isSelected = !card.isSelected;
-            if (card.isSelected && _this.checkToAddSelectedCards(card)) {
-                _this.selectedCards.push(card);
-            }
-            if (_this.selectedCards.length == 2) {
-                var right = _this.selectedCards[0].number == _this.selectedCards[1].number;
-                _this.selectedCards[0].isRight = right;
-                _this.selectedCards[1].isRight = right;
-                _this.selectedCards[0].isSelected = false;
-                _this.selectedCards[1].isSelected = false;
-                _this.refreshButtonClasName(_this.selectedCards[0]);
-                _this.refreshButtonClasName(_this.selectedCards[1]);
-                var c0_1 = _this.selectedCards[0];
-                var c1_1 = _this.selectedCards[1];
-                _this.selectedCards = [];
-                if (!right) {
-                    setTimeout(function () {
-                        c0_1.isRight = null;
-                        c1_1.isRight = null;
-                        _this.refreshButtonClasName(c0_1);
-                        _this.refreshButtonClasName(c1_1);
-                    }, 1000);
-                }
-                if (right) {
-                    if (_this.isLastPairSelection()) {
-                        _this.setAllCardsRight();
-                    }
-                    if (_this.isFinished()) {
-                        clearInterval(_this.timePlayedTimerToken);
-                    }
-                }
-            }
-            _this.refreshButtonClasName(card);
-        };
-        button.onclick = buttonOnClickAction;
-        button.ontouchstart = buttonOnClickAction;
+        this.ui.start();
     };
     CardGame.prototype.checkToAddSelectedCards = function (card) {
         if (this.selectedCards.length == 0)
@@ -123,7 +50,7 @@ var CardGame = (function () {
         for (var index = 0; index < this.cards.length; index++) {
             var card = this.cards[index];
             card.isRight = true;
-            this.refreshButtonClasName(card);
+            this.ui.refresh(card);
         }
     };
     CardGame.prototype.isFinished = function () {
@@ -135,7 +62,114 @@ var CardGame = (function () {
         }
         return true;
     };
-    CardGame.prototype.refreshButtonClasName = function (card) {
+    CardGame.prototype.toggleCard = function (card) {
+        var _this = this;
+        if (card.isRight != null)
+            return;
+        card.isSelected = !card.isSelected;
+        if (card.isSelected && this.checkToAddSelectedCards(card)) {
+            this.selectedCards.push(card);
+        }
+        if (this.selectedCards.length == 2) {
+            var right = this.selectedCards[0].number == this.selectedCards[1].number;
+            this.selectedCards[0].isRight = right;
+            this.selectedCards[1].isRight = right;
+            this.selectedCards[0].isSelected = false;
+            this.selectedCards[1].isSelected = false;
+            this.ui.refresh(this.selectedCards[0]);
+            this.ui.refresh(this.selectedCards[1]);
+            var c0_1 = this.selectedCards[0];
+            var c1_1 = this.selectedCards[1];
+            this.selectedCards = [];
+            if (!right) {
+                c0_1.isSelected = false;
+                c1_1.isSelected = false;
+                this.ui.refresh(c0_1);
+                this.ui.refresh(c1_1);
+                setTimeout(function () {
+                    c0_1.isRight = null;
+                    c1_1.isRight = null;
+                    _this.ui.refresh(c0_1);
+                    _this.ui.refresh(c1_1);
+                }, 200);
+            }
+            if (right) {
+                if (this.isLastPairSelection()) {
+                    this.setAllCardsRight();
+                }
+                if (this.isFinished()) {
+                    this.ui.stopTimer();
+                }
+            }
+        }
+        this.ui.refresh(card);
+    };
+    return CardGame;
+}());
+var Card = (function () {
+    //button: HTMLButtonElement;
+    function Card(number, isEnglish, text) {
+        this.number = number;
+        this.isEnglish = isEnglish;
+        this.text = text;
+        this.isSelected = false;
+        this.isRight = null;
+    }
+    return Card;
+}());
+var DefaultCardGameUI = (function () {
+    function DefaultCardGameUI(cardGame, content) {
+        this.cardGame = cardGame;
+        this.content = content;
+        this.timePlayed = 0;
+        this.buttons = [];
+    }
+    DefaultCardGameUI.prototype.start = function () {
+        var divRow;
+        for (var index = 0; index < this.cardGame.cards.length; index++) {
+            if (index % DefaultCardGameUI.COLUMNS == 0) {
+                divRow = document.createElement('div');
+                this.content.appendChild(divRow);
+                divRow.className = "row";
+            }
+            this.createButton(divRow, this.cardGame.cards[index]);
+        }
+        this.startTimer();
+    };
+    DefaultCardGameUI.prototype.startTimer = function () {
+        var _this = this;
+        this.timePlayedTimerToken = setInterval(function () {
+            _this.timePlayed += 0.1;
+            var timeerSpendLabel = document.getElementById('timeerSpendLabel');
+            timeerSpendLabel.innerText = _this.timePlayed.toFixed(1).toString();
+        }, 100);
+    };
+    DefaultCardGameUI.prototype.stopTimer = function () {
+        clearInterval(this.timePlayedTimerToken);
+    };
+    DefaultCardGameUI.prototype.createButton = function (divRow, card) {
+        var _this = this;
+        var divCell = document.createElement('div');
+        divCell.className = "col-xs-3 col-md-3 col-sm-3";
+        divRow.appendChild(divCell);
+        var button = document.createElement('button');
+        this.buttons.push(button);
+        //card.button = button;
+        this.refresh(card);
+        button.innerText = card.text;
+        button.style.width = "100%";
+        button.style.fontSize = "24px";
+        divCell.appendChild(button);
+        var separator = document.createElement('span');
+        separator.style.width = "10%";
+        divRow.appendChild(separator);
+        var buttonOnClickAction = function () {
+            _this.cardGame.toggleCard(card);
+        };
+        button.onclick = buttonOnClickAction;
+        button.ontouchstart = buttonOnClickAction;
+    };
+    DefaultCardGameUI.prototype.refresh = function (card) {
         var className;
         if (card.isRight == null) {
             if (card.isSelected) {
@@ -153,18 +187,30 @@ var CardGame = (function () {
                 className = "btn btn-danger btn-lg";
             }
         }
-        card.button.className = className;
+        var index = this.cardGame.cards.indexOf(card);
+        this.buttons[index].className = className;
+        //card.button.className = className;
     };
-    return CardGame;
+    DefaultCardGameUI.COLUMNS = 4;
+    return DefaultCardGameUI;
 }());
-var Card = (function () {
-    function Card(number, isEnglish, text) {
-        this.number = number;
-        this.isEnglish = isEnglish;
-        this.text = text;
-        this.isSelected = false;
-        this.isRight = null;
+var Arrays = (function () {
+    function Arrays() {
     }
-    return Card;
+    Arrays.shuffle = function (array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    };
+    return Arrays;
 }());
 //# sourceMappingURL=card-game.js.map

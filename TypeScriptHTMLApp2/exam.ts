@@ -4,11 +4,13 @@ class Exam {
 
     content: HTMLElement;
     questions: Question[];
+    answers: Answer[];
     currentIndex: number;
 
     constructor(content: HTMLElement) {
         this.content = content;
         this.questions = [];
+        this.answers = [];
     }
 
     start(): void {
@@ -32,17 +34,15 @@ class Exam {
         }
     }
 
-    initQuestions(number: number, p_questions: QuestionDefinition[]): void {
-
-        let questions: QuestionDefinition[] = p_questions.slice(0);
+    initAnswers(number: number, p_questions: Question[]): void {
+        let questions: Question[] = p_questions.slice(0);
         Arrays.shuffle(questions);
-
         if (number > questions.length)
             number = questions.length;
-
         for (let index: number = 0; index < number; index++) {
             let q = questions[index];
-            this.questions.push(new Question(q));
+            this.questions.push(q);
+            this.answers.push(new Answer(q));
         }
     }
 
@@ -51,40 +51,54 @@ class Exam {
     }
 }
 
-class Question {
+class Answer {
 
-    type: QuestionType;
-    text: string;
-    answer: string;
-    options: QuestionOptionDefinition[];
+    question: Question;
 
-    constructor(q: QuestionDefinition) {
-        this.type = q.type;
-        this.text = q.text;
-        this.options = q.options;
-        this.shuffleOptions();
+    selectedOption: QuestionOption; // for SINGLE_CHOICE
+
+    selectedOptions: QuestionOption[]; // MULTIPLE_CHOICE
+
+    fillingText: string; // for FILLING
+
+    constructor(question: Question) {
+        this.question = question;
+        this.selectedOption = null;
+        this.selectedOptions = [];
+        this.fillingText = "";
     }
 
-    shuffleOptions() {
-        Arrays.shuffle(this.options);
-    }
-
-    right(): boolean {
-        if (this.type == QuestionType.SINGLE_CHOICE) {
-            let ans: number = parseInt(this.answer);
-            if (ans == NaN) return false;
-            if (ans >= 0 && ans <= this.options.length) {
-                return this.options[ans].right;
-            }
-            else {
-                return false;
-            }
+    toString(): string {
+        switch (this.question.type) {
+            case QuestionType.SINGLE_CHOICE:
+                if (this.selectedOption == null)
+                    return "";
+                return this.selectedOption.text;
+            case QuestionType.MULTIPLE_CHOICE:
+                return this.selectedOptions.toString();
+            case QuestionType.FILLING:
+                return this.fillingText;
         }
-        else if (this.type == QuestionType.MULTIPLE_CHOICE) {
-            let anses: string[] = this.answer.split(",");
-            for (let ans of anses) {
-            }
-            return true;
+    }
+
+    isRight(): boolean {
+        switch (this.question.type) {
+            case QuestionType.SINGLE_CHOICE:
+                if (this.selectedOption == null)
+                    return false;
+                return this.selectedOption.right;
+            case QuestionType.MULTIPLE_CHOICE:
+                for (let option of this.question.options) {
+                    if (this.selectedOptions.indexOf(option) >= 0) {
+                        if (option.right == false) return false;
+                    }
+                    else {
+                        if (option.right == true) return false;
+                    }
+                }
+                return true;
+            case QuestionType.FILLING:
+                return this.fillingText == this.question.fillingAnswer;
         }
     }
 }

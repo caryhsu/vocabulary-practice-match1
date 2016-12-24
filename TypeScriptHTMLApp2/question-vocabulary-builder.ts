@@ -6,16 +6,16 @@
         this.vocabularies = vocabularies;
     }
 
-    toQuestions(): QuestionDefinition[] {
-        let r: QuestionDefinition[] = [];
+    toQuestions(): Question[] {
+        let r: Question[] = [];
         for (let index = 0; index < vocabularies.length; index++) {
             let v: Vocabulary = vocabularies[index];
-            let q: QuestionDefinition = new QuestionDefinition(QuestionType.SINGLE_CHOICE, v.english);
-            let o: QuestionOptionDefinition = new QuestionOptionDefinition(v.chinese, true);
+            let q: Question = new Question(QuestionType.SINGLE_CHOICE, v.english);
+            let o: QuestionOption = new QuestionOption(v.chinese, true);
             q.options.push(o);
             for (let i = 0; i <= 3; i++) {
                 let v: Vocabulary = vocabularies[(index + i) % vocabularies.length];
-                let o: QuestionOptionDefinition = new QuestionOptionDefinition(v.chinese, false);
+                let o: QuestionOption = new QuestionOption(v.chinese, false);
                 q.options.push(o);
             }
         }

@@ -14,8 +14,8 @@
 
     ZERO_RANGE: number[] = [0];
 
-    toQuestions(): QuestionDefinition[] {
-        let r: QuestionDefinition[] = [];
+    toQuestions(): Question[] {
+        let r: Question[] = [];
                 
         let rangeA: number[] = this.ZERO_RANGE;
         if (this.containsA) rangeA = this.buildArray(this.minNumber, this.maxNumber, false);

@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="arrays.ts" />
+    <TypeScriptCompile Include="card-game-ui.ts" />
     <TypeScriptCompile Include="card-game.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="vocabulary.ts" />

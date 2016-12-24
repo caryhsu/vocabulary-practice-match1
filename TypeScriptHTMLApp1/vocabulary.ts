@@ -1,4 +1,3 @@
-var vocabularies = [];
 
 class Vocabulary {
     english: string;
