@@ -1,19 +1,19 @@
 /// <reference path="vocabulary.ts"/>
 /// <reference path="card-game.ts"/>
 var vocabularies = [];
-vocabularies.push(new Vocabulary("TV", "電視", null));
-vocabularies.push(new Vocabulary("water", "水", null));
-vocabularies.push(new Vocabulary("either", "也", null));
-vocabularies.push(new Vocabulary("leave", "離開", null));
-vocabularies.push(new Vocabulary("wrong", "不對的", null));
-vocabularies.push(new Vocabulary("simple", "簡單的", null));
-vocabularies.push(new Vocabulary("main", "主要的", null));
-vocabularies.push(new Vocabulary("ham", "火腿", null));
-vocabularies.push(new Vocabulary("sause", "醬料", null));
-vocabularies.push(new Vocabulary("gartic", "大蒜", null));
-vocabularies.push(new Vocabulary("nut", "堅果", null));
-vocabularies.push(new Vocabulary("salad", "(蔬菜)沙拉", null));
-vocabularies.push(new Vocabulary("shrimp", "蝦子", null));
+vocabularies.push(new Vocabulary("mango", "芒果", null));
+vocabularies.push(new Vocabulary("banana", "香蕉", null));
+vocabularies.push(new Vocabulary("super", "極好的", null));
+vocabularies.push(new Vocabulary("pear", "梨子", null));
+vocabularies.push(new Vocabulary("grape", "葡萄", null));
+vocabularies.push(new Vocabulary("stand", "攤位", null));
+vocabularies.push(new Vocabulary("watermelon", "西瓜", null));
+vocabularies.push(new Vocabulary("pineapple", "鳳梨", null));
+vocabularies.push(new Vocabulary("papaya", "木瓜", null));
+vocabularies.push(new Vocabulary("guava", "芭樂", null));
+vocabularies.push(new Vocabulary("honey", "蜂蜜", null));
+vocabularies.push(new Vocabulary("produce", "生產", null));
+vocabularies.push(new Vocabulary("female", "雌的;母的", null));
 window.onload = function () {
     var content = document.getElementById('content');
     var game = new CardGame(content);
