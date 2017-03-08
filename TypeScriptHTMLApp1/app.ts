@@ -2,19 +2,19 @@
 /// <reference path="card-game.ts"/>
 
 var vocabularies = [];
-vocabularies.push(new Vocabulary("mango", "芒果", null));
-vocabularies.push(new Vocabulary("banana", "香蕉", null));
-vocabularies.push(new Vocabulary("super", "極好的", null));
-vocabularies.push(new Vocabulary("pear", "梨子", null));
-vocabularies.push(new Vocabulary("grape", "葡萄", null));
-vocabularies.push(new Vocabulary("stand", "攤位", null));
-vocabularies.push(new Vocabulary("watermelon", "西瓜", null));
-vocabularies.push(new Vocabulary("pineapple", "鳳梨", null));
-vocabularies.push(new Vocabulary("papaya", "木瓜", null));
-vocabularies.push(new Vocabulary("guava", "芭樂", null));
-vocabularies.push(new Vocabulary("honey", "蜂蜜", null));
-vocabularies.push(new Vocabulary("produce", "生產", null));
-vocabularies.push(new Vocabulary("female", "雌的;母的", null));
+vocabularies.push(new Vocabulary("news", "新聞", null));
+vocabularies.push(new Vocabulary("tournament", "錦標賽", null));
+vocabularies.push(new Vocabulary("team", "團隊", null));
+vocabularies.push(new Vocabulary("move", "移動", null));
+vocabularies.push(new Vocabulary("hit", "打擊", null));
+vocabularies.push(new Vocabulary("hand", "手", null));
+vocabularies.push(new Vocabulary("ground", "地面", null));
+vocabularies.push(new Vocabulary("touch", "碰觸", null));
+vocabularies.push(new Vocabulary("crowd", "人群", null));
+vocabularies.push(new Vocabulary("serve", "發球", null));
+vocabularies.push(new Vocabulary("return", "回擊球", null));
+vocabularies.push(new Vocabulary("dislike", "不喜歡", null));
+vocabularies.push(new Vocabulary("hate", "恨", null));
 
 window.onload = () => {
     var content = document.getElementById('content');
